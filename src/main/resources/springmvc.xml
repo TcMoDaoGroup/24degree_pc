@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+    <!--<context:component-scan base-package="com.dujia" use-default-filters="false">-->
+    <!--<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"></context:exclude-filter>-->
+    <!--</context:component-scan>-->
+    <context:component-scan base-package="com.dujia.controller"></context:component-scan>
+    <context:component-scan base-package="com.dujia.service"></context:component-scan>
+    <context:component-scan base-package="com.dujia.util"></context:component-scan>
+    <context:component-scan base-package="com.dujia.help"></context:component-scan>
+
+
+    <!--    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
+    <!--        &lt;!&ndash; 最大文件大小，单位字节 &ndash;&gt;-->
+    <!--        <property name="defaultEncoding" value="utf-8"></property>-->
+    <!--        <property name="maxUploadSize" value="100000"/>-->
+    <!--    </bean>-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8"></property>
+        <property name="maxUploadSize" value="10485760"></property>
+    </bean>
+
+
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    <mvc:default-servlet-handler />
+
+
+</beans>

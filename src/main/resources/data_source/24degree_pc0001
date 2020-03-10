@@ -1,0 +1,240 @@
+DROP DATABASE IF EXISTS 24degree_pc;
+CREATE DATABASE 24degree_pc CHARACTER SET 'UTF8';
+USE 24degree_pc;
+
+DROP TABLE IF EXISTS user_info;
+
+DROP TABLE IF EXISTS homestay_wen_brigade_info;
+
+DROP TABLE IF EXISTS cultural_creative_park_info;
+
+DROP TABLE IF EXISTS landing_pad_info;
+
+DROP TABLE IF EXISTS aplc_culture_info;
+
+DROP TABLE IF EXISTS commodity_info;
+
+DROP TABLE IF EXISTS user_address_info;
+
+DROP TABLE IF EXISTS commodity_order_info;
+
+DROP TABLE IF EXISTS image_info;
+
+/*==============================================================*/
+/* Table: user_info                                             */
+/*==============================================================*/
+CREATE TABLE user_info
+(
+   user_id              INTEGER NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+   user_name            VARCHAR(20) NOT NULL COMMENT '用户姓名',
+   user_age       	INT(10) NOT NULL COMMENT '用户年龄',
+   user_phone           VARCHAR(11) NOT NULL COMMENT '联系方式',
+   user_pwd             VARCHAR(20) NOT NULL COMMENT '用户密码',
+   user_create_time     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+   user_update_time     DATETIME DEFAULT NULL COMMENT '修改时间',
+   user_state           INT NOT NULL DEFAULT 0 COMMENT '账号状态(0:可用但无信号;1:成功;2:无效;)',
+   PRIMARY KEY (user_id),
+   UNIQUE KEY AK_Key_2 (user_phone)
+)
+CHARSET = 'UTF8';
+ALTER TABLE user_info COMMENT '用户信息数据表';
+
+/*==============================================================*/
+/* Table: homestay_wen_brigade_info                                             */
+/*==============================================================*/
+CREATE TABLE homestay_wen_brigade_info(
+   home_stay_id         	VARCHAR(10) NOT NULL COMMENT '民宿ID',
+   user_id                      INTEGER NOT NULL  COMMENT '用户ID',
+   home_stay_name       	VARCHAR(40) COMMENT '民宿管理者-名称',
+   home_stay_age      		INT(10)  COMMENT '民宿管理者-年龄',
+   home_stay_phone  		VARCHAR(11) NOT NULL COMMENT '民宿管理者-联系方式',
+   home_stay_address    	VARCHAR(120) COMMENT '民宿-地址',
+   home_stay_details    	VARCHAR(120) COMMENT '民宿-详情',
+   home_stay_area  		VARCHAR(20) NOT NULL COMMENT '民宿-面积',
+   home_stay_create_time 	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '民宿-加入时间',
+   home_stay_update_time 	DATETIME DEFAULT NULL COMMENT '民宿-修改时间',
+   home_stay_delete_time 	DATETIME DEFAULT NULL COMMENT '民宿-删除时间',
+   home_stay_state      	INT NOT NULL DEFAULT 1 COMMENT '民宿-状态(0:失败;1:成功;2:无效;)',
+   PRIMARY KEY (home_stay_id)
+)
+CHARSET = 'UTF8';
+
+ALTER TABLE homestay_wen_brigade_info COMMENT '房东预约报名表信息数据表';
+
+
+/*==============================================================*/
+/* Table: cultural_creative_park_info                                             */
+/*==============================================================*/
+CREATE TABLE cultural_creative_park_info(
+   cultural_id         		VARCHAR(10) NOT NULL COMMENT '文化创意园ID',
+   user_id                      INTEGER NOT NULL  COMMENT '用户ID',
+   cultural_name       		VARCHAR(40) COMMENT '预约报名者-名称',
+   cultural_age      		INT(10)  COMMENT '预约报名者-年龄',
+   cultural_phone  		VARCHAR(11) NOT NULL COMMENT '预约报名者-联系方式',
+   cultural_company     	VARCHAR(20) NOT NULL COMMENT '公司/项目',
+   cultural_email       	VARCHAR(20) NOT NULL COMMENT '预约报名者-邮箱',
+   cultural_address    		VARCHAR(120) COMMENT '地址',
+   cultural_create_time     	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+   cultural_update_time     	DATETIME DEFAULT NULL COMMENT '修改时间',
+   cultural_state           	INT NOT NULL DEFAULT 0 COMMENT '账号状态(0:可用但无信号;1:成功;2:无效;)',
+   PRIMARY KEY (cultural_id)
+)
+CHARSET = 'UTF8';
+
+ALTER TABLE cultural_creative_park_info COMMENT '文化创意园预约报名信息数据表';
+
+
+/*==============================================================*/
+/* Table: landing_pad_info                                             */
+/*==============================================================*/
+CREATE TABLE landing_pad_info(
+   landing_pad_id         	VARCHAR(10) NOT NULL COMMENT '创新基地ID',
+   user_id                      INTEGER NOT NULL  COMMENT '用户ID',
+   landing_pad_name       	VARCHAR(40) COMMENT '预约报名者-名称',
+   landing_pad_age      	INT(10)  COMMENT '预约报名者-年龄',
+   landing_pad_phone  		VARCHAR(11) NOT NULL COMMENT '预约报名者-联系方式',
+   landing_pad_school     	VARCHAR(20) NOT NULL COMMENT '预约报名者-学校',
+   landing_pad_specialty     	VARCHAR(20) NOT NULL COMMENT '预约报名者-专业',
+   landing_pad_adviser     	VARCHAR(20) NOT NULL COMMENT '预约报名者-指导老师',
+   landing_pad_email       	VARCHAR(20) NOT NULL COMMENT '预约报名者-邮箱',
+   landing_pad_address    	VARCHAR(120) COMMENT '地址',
+   landing_pad_create_time     	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+   landing_pad_update_time     	DATETIME DEFAULT NULL COMMENT '修改时间',
+   landing_pad_state           	INT NOT NULL DEFAULT 0 COMMENT '账号状态(0:可用但无信号;1:成功;2:无效;)',
+   PRIMARY KEY (landing_pad_id)
+)
+CHARSET = 'UTF8';
+
+ALTER TABLE landing_pad_info COMMENT '创新基地预约报名信息数据表';
+
+
+/*==============================================================*/
+/* Table: aplc_culture_info                                             */
+/*==============================================================*/
+CREATE TABLE aplc_culture_info(
+   aplc_culture_id         		VARCHAR(10) NOT NULL COMMENT '创新基地ID',
+   user_id                      	INTEGER NOT NULL  COMMENT '用户ID',
+   aplc_culture_name       		VARCHAR(40) COMMENT '预约报名者-名称',
+   aplc_culture_age      		INT(10)  COMMENT '预约报名者-年龄',
+   aplc_culture_phone  			VARCHAR(11) NOT NULL COMMENT '预约报名者-联系方式',
+   aplc_culture_school     		VARCHAR(20) NOT NULL COMMENT '预约报名者-学校',
+   aplc_culture_specialty     		VARCHAR(20) NOT NULL COMMENT '预约报名者-专业',
+   aplc_culture_email       		VARCHAR(20) NOT NULL COMMENT '预约报名者-邮箱',
+   aplc_culture_activity    		VARCHAR(120) COMMENT '活动',
+   aplc_culture_address    		VARCHAR(120) COMMENT '地址',
+   aplc_culture_create_time     	TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+   aplc_culture_update_time     	DATETIME DEFAULT NULL COMMENT '修改时间',
+   aplc_culture_state           	INT NOT NULL DEFAULT 0 COMMENT '账号状态(0:可用但无信号;1:成功;2:无效;)',
+   PRIMARY KEY (aplc_culture_id)
+)
+CHARSET = 'UTF8';
+
+ALTER TABLE aplc_culture_info COMMENT 'APLC非遗文化预约报名信息数据表';
+
+
+/*==============================================================*/
+/* Table: commodity_info                                             */
+/*==============================================================*/
+CREATE TABLE commodity_info(
+   commodity_id         		VARCHAR(10) NOT NULL COMMENT '商品ID',
+   image_id          			INTEGER NOT NULL COMMENT '图片ID',
+   commodity_name       		VARCHAR(40) COMMENT '商品名称',
+   commodity_price        		DECIMAL COMMENT '商品价格',
+   commodity_count        		INT COMMENT '商品数量',
+   commodity_describe			VARCHAR(120) COMMENT '商品描述',
+   commodity_address    		VARCHAR(120) COMMENT '商品产地',
+   commodity_up_time      		TIMESTAMP NOT NULL COMMENT '商品上架时间',
+   commodity_down_time    		DATETIME NOT NULL COMMENT '商品下架时间',
+   commodity_update_time   		DATETIME NOT NULL COMMENT '商品修改时间',
+   commodity_state         		INT DEFAULT 1 COMMENT '状态(0:失败;1:成功;2:无效;)',
+   PRIMARY KEY (commodity_id)
+)
+CHARSET = 'UTF8';
+
+ALTER TABLE commodity_info COMMENT '商品信息数据表';
+
+
+/*==============================================================*/
+/* Table: user_address_info                                     */
+/*==============================================================*/
+CREATE TABLE user_address_info (
+   user_address_id              INTEGER NOT NULL AUTO_INCREMENT COMMENT '用户收获地址id',
+   user_id                      INTEGER NOT NULL  COMMENT '用户ID',
+   user_address_name            VARCHAR(10) COMMENT '收货人姓名',
+   user_address_phone           VARCHAR(11) COMMENT '收货人联系方式',
+   user_address_identity_card   VARCHAR(18) COMMENT '收货人身份证',
+   user_address_location        VARCHAR(120) COMMENT '收货人-地址',
+   user_address_create_time     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+   user_address_update_time     DATETIME DEFAULT NULL COMMENT '修改时间',
+   user_address_delete_time     DATETIME DEFAULT NULL COMMENT '删除时间',
+   user_address_state           INT NOT NULL DEFAULT 1 COMMENT '账号状态(0:失败;1:成功;2:无效;)',
+   PRIMARY KEY (user_address_id),
+   UNIQUE KEY AK_Key_2 (user_address_phone,user_address_identity_card)
+)
+CHARSET = 'UTF8' COMMENT '收货人地址数据表';
+
+
+/*==============================================================*/
+/* Table: commodity_order_form                                  */
+/*==============================================================*/
+CREATE TABLE commodity_order_info
+(
+   commodity_order_id          INTEGER NOT NULL AUTO_INCREMENT COMMENT '商品订单ID(后端)',
+   commodity_order_after_id    VARCHAR(20) NOT NULL COMMENT '商品订单-订单号ID(用户端)',
+   user_id                     INTEGER NOT NULL COMMENT '用户ID',
+   commodity_id                INTEGER NOT NULL COMMENT '商品id',
+   user_address_id             INTEGER COMMENT '收货人-地址-id',
+   commodity_order_num         INT COMMENT '商品数量',
+   commodity_order_price       DECIMAL(10) COMMENT '商品订单-交易金额',
+   commodity_order_create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '商品订单-创建时间',
+   commodity_order_end_time    DATETIME DEFAULT NULL COMMENT '商品订单修改日期',
+   commodity_order_state       INT DEFAULT 1 COMMENT '商品订单-状态（0:失败，1：成功，2：失败, 3：成功且默认地址）',
+   PRIMARY KEY (commodity_order_id)
+)
+CHARSET = 'UTF8' COMMENT '商品订单信息数据表';
+
+
+/*==============================================================*/
+/* Table: image_info                                  */
+/*==============================================================*/
+CREATE TABLE image_info
+(
+   image_id          INTEGER NOT NULL AUTO_INCREMENT COMMENT '图片ID',
+   image_1	     VARCHAR(120) COMMENT '商品图片1',
+   image_2	     VARCHAR(120) COMMENT '商品图片2',
+   image_3	     VARCHAR(120) COMMENT '商品图片3',
+   image_4	     VARCHAR(120) COMMENT '商品图片4',
+   image_5	     VARCHAR(120) COMMENT '商品图片5',
+   image_6	     VARCHAR(120) COMMENT '商品图片6',
+   image_7	     VARCHAR(120) COMMENT '商品图片7',
+   image_8	     VARCHAR(120) COMMENT '商品图片8',
+   PRIMARY KEY (image_id)
+)
+CHARSET = 'UTF8' COMMENT '图片信息数据表';
+
+
+
+ALTER TABLE homestay_wen_brigade_info ADD CONSTRAINT FK_Reference_18 FOREIGN KEY (user_id)
+      REFERENCES user_info (user_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE cultural_creative_park_info ADD CONSTRAINT FK_Reference_19 FOREIGN KEY (user_id)
+      REFERENCES user_info (user_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE landing_pad_info ADD CONSTRAINT FK_Reference_20 FOREIGN KEY (user_id)
+      REFERENCES user_info (user_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE aplc_culture_info ADD CONSTRAINT FK_Reference_21 FOREIGN KEY (user_id)
+      REFERENCES user_info (user_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE user_address_info ADD CONSTRAINT FK_Reference_22 FOREIGN KEY (user_id)
+      REFERENCES user_info (user_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE commodity_order_info ADD CONSTRAINT FK_Reference_23 FOREIGN KEY (user_id)
+      REFERENCES user_info (user_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE commodity_order_info ADD CONSTRAINT FK_Reference_24 FOREIGN KEY (user_address_id)
+      REFERENCES user_address_info (user_address_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE commodity_info ADD CONSTRAINT FK_Reference_25 FOREIGN KEY (image_id)
+      REFERENCES image_info (image_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
