@@ -10,7 +10,7 @@
 
     <properties>
         <junit.version>4.12</junit.version>
-        <mysql.version>8.0.18</mysql.version>
+        <mysql.version>8.0.28</mysql.version>
         <mybatis-plus.version>3.2.0</mybatis-plus.version>
         <mybatis-plus-generator.version>3.2.0</mybatis-plus-generator.version>
         <spring-freemarker.version>2.3.29</spring-freemarker.version>
